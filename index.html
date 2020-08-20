@@ -155,7 +155,7 @@
         if(text.toLowerCase().indexOf("релиз") !== -1) {
           result += " Релиз на хуце повис"
         }
-        if(text.toLowerCase().indexOf("постановка") !== -1) {
+        if(text.toLowerCase().indexOf("постановка") !== -1 || text.toLowerCase().indexOf("постановкy") !== -1) {
           result += " Постановка раком!"
         }
         if(text.toLowerCase().indexOf("pull request") !== -1) {
@@ -170,8 +170,23 @@
         if(text.toLowerCase().indexOf("баги") !== -1) {
           result += " Это не мы! Баги на бэке!"
         }
+        if(text.toLowerCase().indexOf("доделать") !== -1) {
+          result += " Голову твою кто-бы доделал."
+        }
+        if(text.toLowerCase().indexOf("жопа") !== -1) {
+          result += " Я за твою жопу не в ответе"
+        }
+        if(text.toLowerCase().indexOf("front") !== -1 || text.toLowerCase().indexOf("фронт") !== -1) {
+          result += " Морда не жопа, та производит, эта потребляет"
+        }
+        if(text.toLowerCase().indexOf("бэк") !== -1 || text.toLowerCase().indexOf("бек") || text.toLowerCase().indexOf("back")) {
+          result += " Я за задний привод не в ответе."
+        }
         if(text.toLowerCase().indexOf("новый функционал") !== -1) {
           result += " Новый функционал ты после себя в туалете оставляешь."
+        }
+        if(text.toLowerCase().indexOf("конфликт") !== -1) {
+          result += " Конфликт у твоей головы и жопы!"
         }
         if(text.toLowerCase().indexOf("сложно") !== -1 || text.toLowerCase().indexOf("Сложный") !== -1 || text.toLowerCase().indexOf("Сложная") !== -1) {
           result += " Ну тут заебешся делать!"
@@ -260,7 +275,7 @@
 
     const tm = new TaskManager();
 
-    const dictionaryNegative = ["sap", "новый функционал", "экспресс", "pull request", "пул реквест", "релиз", "сап","баги", "cпринт", "bussines objects", "бизнес обжектс","быстро","горит","постановка не готова","сложно","сложная", "сложный", "сроки горят","срочно", "пиздюлей", "пиздюль"];
+    const dictionaryNegative = ["sap", "конфликт", "жопа", "бэк", "бек", "back", "фронт", "front", "доделать", "постановкy", "новый функционал", "экспресс", "pull request", "пул реквест", "релиз", "сап","баги", "cпринт", "bussines objects", "бизнес обжектс","быстро","горит","постановка не готова","сложно","сложная", "сложный", "сроки горят","срочно", "пиздюлей", "пиздюль"];
     const dictionaryPositive = ["пиво", "пивко", "премия", "оценка", "бабла", "премия", "премию", "зарплату", "зарпалата", "деньги", "денег", "повышение"];
     const btn = document.querySelector(".button");
     const task = document.querySelector(".task");
