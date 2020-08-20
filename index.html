@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <title>TEST</title>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      margin: 0;
+      font-family: "Arial"
+    }
+    .red {
+      color: red
+    }
+
+    .green {
+      color: green
+    }
+
+    .bg {
+      background: #2C3035;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .button {
+      color: #C4C4C4;
+      height: 40px;
+      width: 180px;
+      background: linear-gradient(154.55deg, #464E56 -18.61%, #222529 116.04%);
+      border: 0.5px solid #57B15B;
+      box-sizing: border-box;
+      box-shadow: -2px -3px 8px #474E57, 2px 3px 8px rgba(0, 0, 0, 0.5);
+      border-radius: 8px;
+      position: relative;
+      align-self: center;
+      margin: 24px auto;
+      display: block;
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      overflow: hidden;
+      border-radius: 100px;
+      margin: 24px auto;
+      background: linear-gradient(154.55deg, #464E56 -18.61%, #222529 116.04%);
+      box-sizing: border-box;
+      box-shadow: -2px -3px 8px #474E57, 2px 3px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .frame {
+      position: relative;
+      margin: 0 auto;
+      width: 280px;
+      display: block;
+      flex-wrap: wrap;
+    }
+
+    .name {
+      color: #C4C4C4;
+      text-align: center;
+      font-size: 28px;
+    }
+
+    .commentFRAME {
+      width: 280px;
+      height: 300px;
+      color: #C4C4C4;
+      margin-top: 35px;
+      padding: 15px;
+      background: linear-gradient(154.55deg, #464E56 -18.61%, #222529 116.04%);
+      box-sizing: border-box;
+      box-shadow: -2px -3px 8px #474E57, 2px 3px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .i  {
+      font-size: 12px;
+      margin-bottom: 5px;
+      padding: 10px 0;
+      border-bottom: 1px solid #5d5d5d;
+    }
+    .task, .pretask, .comment  {
+      font-size: 12px;
+      margin-bottom: 5px;
+      padding: 10px 0;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="bg">
+    <div class="frame">
+      <div class="avatar"><img src="av.jpg" alt=""></div>
+      <div class="name">Фил оценщик задач</div>
+      <Button class="button">Оценить задачу</Button>
+      <div class="commentFRAME">
+      <div class="i">Привет я Фил! Я оценю твою задачу...</div>
+      <div class="i">Задача должна начанатся со слова "нужно".</div>
+      <div class="i">Нажмите кнопку "оценить задачу" и говорите</div>
+      <div class="pretask"></div>
+      <div class="task"></div>
+      <div class="comment"></div>
+      </div>
+      <div class="estimation"></div>
+    </div>
+  </div>
+
+  <script>
+    class TaskManager {
+      CreateVoiser() {
+        const recognizer = new webkitSpeechRecognition();
+        recognizer.interimResults = true;
+        recognizer.lang = 'ru-Ru';
+        return recognizer
+      }
+      
+      ProcessingTask(recognizer, callback) {
+        let task = "";
+        recognizer.onresult = function (event) {
+          const result = event.results[event.resultIndex];
+          if (result.isFinal) {
+            callback(result[0].transcript , true);
+          } else {
+            callback(result[0].transcript , false);
+          }
+        };
+      }
+      
+      TextMetric(text) {
+        let result ="";
+        if(text.toLowerCase().indexOf("sap") !== -1) {
+          result += " Сап это сраный кусок говна! делать ппц долго!"
+        }
+        if(text.toLowerCase().indexOf("bussines objects") !== -1 || text.toLowerCase().indexOf("бизнес обжектс") !== -1) {
+          result += " cбизнес обжектс это сраный кусок говна! делать ппц долго!"
+        }
+        if(text.toLowerCase().indexOf("быстро") !== -1) {
+          result += " быстро не выйдет!"
+        }
+        if(text.toLowerCase().indexOf("постановка не готова") !== -1) {
+          result += " Ну без постоновки хер пойми как делать!"
+        }
+        if(text.toLowerCase().indexOf("сложно") !== -1 || text.toLowerCase().indexOf("Сложный") !== -1 || text.toLowerCase().indexOf("Сложная") !== -1) {
+          result += " Ну тут Заебешся делать!"
+        }
+        if(text.toLowerCase().indexOf("сроки горят") !== -1) {
+          result += " Сроки горят... Работа стоит!"
+        }
+        if(text.toLowerCase().indexOf("срочно") !== -1) {
+          result += " Срочность не за бесплатно!"
+        }
+        if(text.toLowerCase().indexOf("срочно") !== -1) {
+          result += " Срочность не за бесплатно!"
+        }
+        if(text.toLowerCase().indexOf("пиздюлей") !== -1 || text.toLowerCase().indexOf("пиздюль") !== -1) {
+          result += " Я их сам отпизжу"
+        }
+        
+        if(text.toLowerCase().indexOf("срочно") !== -1) {
+          result += " Срочность не за бесплатно!"
+        }
+        
+        if(text.toLowerCase().indexOf("деньги") !== -1 || text.toLowerCase().indexOf("денег") !== -1) {
+          result += " Сколько дашь?!"
+        }
+        
+        if(text.toLowerCase().indexOf("повышение") !== -1 || text.toLowerCase().indexOf("зарплата") !== -1 || text.toLowerCase().indexOf("зарплату") !== -1) {
+          result += " За бабло всегда готов!"
+        }
+        
+        if(result.length === 0) {
+          result += "Задрали со своими оценками!"
+        }
+            
+        if(result.toLowerCase().indexOf("нужно") === -1) {
+          result = "Это не задача! Не беси меня!"
+        }
+        
+        return result;
+      }
+      
+      TaskTime(result, n, p) {
+        const main = (result.length * Math.PI) / 10;
+        let neg = 0;
+        let poz = 0;
+        
+        result.split(" ").forEach((item) => {
+          if(n.indexOf(item) !== -1) {
+            neg += 0.25;
+          }
+          
+          if(p.indexOf(item) !== -1) {
+            poz += 0.5;
+          }
+        });
+        
+        let r = String((main + neg - poz).toFixed(0));
+        
+        if(result.toLowerCase().indexOf("нужно") === -1) {
+          r = "0"
+        }
+        
+        return r;
+      }
+      
+      CustomComment(result, n, p) {
+        let str = "";
+        result.split(" ").forEach((item) => {
+          if(n.indexOf(item) !== -1) {
+            str += '<span class="red">' + item + "</span>" + " "
+          }else if(p.indexOf(item) !== -1) {
+            str += '<span class="green">' + item + "</span>" + " "
+          } else {
+            str += item + " "
+          }
+        });
+        
+        return str;
+      }
+      
+      CreateResponse(text) {
+        const voices = speechSynthesis.getVoices();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.voice = voices[1];
+        speechSynthesis.speak(utterance);
+      }
+    }
+
+    const tm = new TaskManager();
+
+    const dictionaryNegative = ["sap","сап","bussines objects","бизнес обжектс","быстро","горит","постановка не готова","сложно","сложная", "сложный", "сроки горят","срочно", "пиздюлей", "пиздюль"];
+    const dictionaryPositive = ["пиво", "премия", "оценка", "бабла", "премия", "премию", "зарплату", "зарпалата", "деньги", "денег", "повышение"];
+    const btn = document.querySelector(".button");
+    const task = document.querySelector(".task");
+    const pretask = document.querySelector(".pretask");
+    const comment = document.querySelector(".comment");
+    const estimation = document.querySelector(".estimation");
+    const rec = tm.CreateVoiser();
+
+    tm.ProcessingTask(rec, (result, state) => {
+      if(state) {
+        tm.TaskTime(result, dictionaryNegative, dictionaryPositive);
+        const myComment = tm.TextMetric(result);
+        const myTime = tm.TaskTime(result, dictionaryNegative, dictionaryPositive);
+        task.innerHTML = tm.CustomComment(result, dictionaryNegative, dictionaryPositive);
+        pretask.innerHTML = "";
+        comment.innerHTML = myComment;
+        estimation.innerHTML = "Моя оценка: " + tm.TaskTime(result, dictionaryNegative, dictionaryPositive) + " ч/ч";
+        tm.CreateResponse(myComment + " Моя оценка: " + myTime + "человеко часов");
+      } else {
+        pretask.innerHTML = result;
+        task.innerHTML = "";
+      }
+    });
+
+    let activeState = false;
+    btn.onclick = function() {
+      if(!activeState) {
+        activeState = true;
+        btn.innerHTML = "Остановить оценку.";
+        rec.start();
+      } else {
+        activeState = false;
+        btn.innerHTML = "Оценить задачу";
+        rec.stop();
+      } 
+    }
+  </script>
+</body>
+</html>
