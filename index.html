@@ -6,7 +6,7 @@
   <style>
     body {
       margin: 0;
-      font-family: "Arial"
+      FONT-FAMILY: "Arial"
     }
     .red {
       color: red
@@ -65,7 +65,6 @@
 
     .commentFRAME {
       width: 280px;
-      height: 300px;
       color: #C4C4C4;
       margin-top: 35px;
       padding: 15px;
@@ -80,32 +79,34 @@
       padding: 10px 0;
       border-bottom: 1px solid #5d5d5d;
     }
-    .task, .pretask, .comment  {
+    .task, .pretask, .comment, .estimation  {
       font-size: 12px;
       margin-bottom: 5px;
       padding: 10px 0;
     }
 
+
   </style>
 </head>
 <body>
 
-  <div class="bg">
-    <div class="frame">
-      <div class="avatar"><img src="av.jpg" alt=""></div>
-      <div class="name">Фил оценщик задач</div>
-      <Button class="button">Оценить задачу</Button>
-      <div class="commentFRAME">
-      <div class="i">Привет я Фил! Я оценю твою задачу...</div>
-      <div class="i">Задача должна начанатся со слова "нужно".</div>
-      <div class="i">Нажмите кнопку "оценить задачу" и говорите</div>
-      <div class="pretask"></div>
-      <div class="task"></div>
-      <div class="comment"></div>
-      </div>
-      <div class="estimation"></div>
+<div class="bg">
+  <div class="frame">
+    <div class="avatar"></div>
+    <div class="name">Фил оценщик задач</div>
+    <Button class="button">Оценить задачу</Button>
+    <div class="commentFRAME">
+     <div class="i">Привет я Фил! Я оценю твою задачу...</div>
+     <div class="i">Задача должна начанатся со слова "нужно".</div>
+     <div class="i">Нажмите кнопку "оценить задачу" и говорите</div>
+     <div class="pretask"></div>
+     <div class="task"></div>
+     <div class="comment"></div>
+     <div class="estimation"></div>
     </div>
   </div>
+</div>
+
 
   <script>
     class TaskManager {
