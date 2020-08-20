@@ -185,7 +185,9 @@
         if(text.toLowerCase().indexOf("срочно") !== -1) {
           result += " Срочность не за бесплатно!"
         }
-        
+        if(text.toLowerCase().indexOf("сборку") !== -1) {
+          result += " Выкати свои сборки на сортире."
+        }
         if(text.toLowerCase().indexOf("деньги") !== -1 || text.toLowerCase().indexOf("денег") !== -1) {
           result += " Сколько дашь?!"
         }
