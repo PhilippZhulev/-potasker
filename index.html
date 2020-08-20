@@ -3,6 +3,7 @@
 <head>
   <title>TEST</title>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=500px">
   <style>
     body {
       margin: 0;
@@ -148,28 +149,49 @@
         if(text.toLowerCase().indexOf("постановка не готова") !== -1) {
           result += " Ну без постоновки хер пойми как делать!"
         }
+        if(text.toLowerCase().indexOf("спринт") !== -1) {
+          result += " Я твой спринт на ху вертел."
+        }
+        if(text.toLowerCase().indexOf("релиз") !== -1) {
+          result += " Релиз на хуце повис"
+        }
+        if(text.toLowerCase().indexOf("постановка") !== -1) {
+          result += " Постановка раком!"
+        }
+        if(text.toLowerCase().indexOf("pull request") !== -1) {
+          result += " Я твой мама, pull request"
+        }
+        if(text.toLowerCase().indexOf("экспресс") !== -1) {
+          result += " Экспресс можно только передернуть."
+        }
+        if(text.toLowerCase().indexOf("пул реквест") !== -1) {
+          result += " Я твой мама, pull request"
+        }
+        if(text.toLowerCase().indexOf("баги") !== -1) {
+          result += " Это не мы! Баги на бэке!"
+        }
+        if(text.toLowerCase().indexOf("новый функционал") !== -1) {
+          result += " Новый функционал ты после себя в туалете оставляешь."
+        }
         if(text.toLowerCase().indexOf("сложно") !== -1 || text.toLowerCase().indexOf("Сложный") !== -1 || text.toLowerCase().indexOf("Сложная") !== -1) {
-          result += " Ну тут Заебешся делать!"
+          result += " Ну тут заебешся делать!"
         }
         if(text.toLowerCase().indexOf("сроки горят") !== -1) {
           result += " Сроки горят... Работа стоит!"
         }
-        if(text.toLowerCase().indexOf("срочно") !== -1) {
-          result += " Срочность не за бесплатно!"
-        }
-        if(text.toLowerCase().indexOf("срочно") !== -1) {
-          result += " Срочность не за бесплатно!"
-        }
         if(text.toLowerCase().indexOf("пиздюлей") !== -1 || text.toLowerCase().indexOf("пиздюль") !== -1) {
           result += " Я их сам отпизжу"
         }
-        
         if(text.toLowerCase().indexOf("срочно") !== -1) {
           result += " Срочность не за бесплатно!"
         }
         
         if(text.toLowerCase().indexOf("деньги") !== -1 || text.toLowerCase().indexOf("денег") !== -1) {
           result += " Сколько дашь?!"
+        }
+        
+        if(text.toLowerCase().indexOf("пиво") !== -1 || text.toLowerCase().indexOf("пивко") !== -1) {
+          result += " Возможно мы можем договорится."
         }
         
         if(text.toLowerCase().indexOf("повышение") !== -1 || text.toLowerCase().indexOf("зарплата") !== -1 || text.toLowerCase().indexOf("зарплату") !== -1) {
@@ -236,14 +258,14 @@
 
     const tm = new TaskManager();
 
-    const dictionaryNegative = ["sap","сап","bussines objects","бизнес обжектс","быстро","горит","постановка не готова","сложно","сложная", "сложный", "сроки горят","срочно", "пиздюлей", "пиздюль"];
-    const dictionaryPositive = ["пиво", "премия", "оценка", "бабла", "премия", "премию", "зарплату", "зарпалата", "деньги", "денег", "повышение"];
+    const dictionaryNegative = ["sap", "новый функционал", "экспресс", "pull request", "пул реквест", "релиз", "сап","баги", "cпринт", "bussines objects", "бизнес обжектс","быстро","горит","постановка не готова","сложно","сложная", "сложный", "сроки горят","срочно", "пиздюлей", "пиздюль"];
+    const dictionaryPositive = ["пиво", "пивко", "премия", "оценка", "бабла", "премия", "премию", "зарплату", "зарпалата", "деньги", "денег", "повышение"];
     const btn = document.querySelector(".button");
     const task = document.querySelector(".task");
     const pretask = document.querySelector(".pretask");
     const comment = document.querySelector(".comment");
     const estimation = document.querySelector(".estimation");
-    const rec = tm.CreateVoiser();
+    let rec = tm.CreateVoiser();
 
     tm.ProcessingTask(rec, (result, state) => {
       if(state) {
@@ -255,6 +277,7 @@
         comment.innerHTML = myComment;
         estimation.innerHTML = "Моя оценка: " + tm.TaskTime(result, dictionaryNegative, dictionaryPositive) + " ч/ч";
         tm.CreateResponse(myComment + " Моя оценка: " + myTime + "человеко часов");
+        result = "";
       } else {
         pretask.innerHTML = result;
         task.innerHTML = "";
@@ -269,8 +292,10 @@
         rec.start();
       } else {
         activeState = false;
+        window.location.reload();
         btn.innerHTML = "Оценить задачу";
         rec.stop();
+        rec = tm.CreateVoiser();
       } 
     }
   </script>
